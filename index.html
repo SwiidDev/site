@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SUBWIID — Minimal House / Hard Techno · South Africa</title>
+<meta name="description" content="subwiid: minimal house that strips down, hard techno that hits back. South African DJ, now taking first bookings. bookings@subwiid.co.za">
+<style>
+/* ============ fonts (all local — nothing leaves the machine) ============ */
+@font-face{font-family:"BigS";src:url(assets/BigShoulders.ttf);font-weight:100 900}
+@font-face{font-family:"Arch";src:url(assets/Archivo.ttf);font-weight:100 900}
+@font-face{font-family:"Mono";src:url(assets/JBMono.ttf);font-weight:100 800}
+@font-face{font-family:"FAB";src:url(assets/fa-brands-400.woff2)}
+
+:root{
+  --bg:#06050a; --ink:#f3f1f7; --muted:#a49fb3; --line:rgba(243,241,247,.14);
+  --mint:#5cffc6; --uv:#5b3cff; --edge:clamp(20px,2.4vw,44px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:"Arch",sans-serif}
+
+/* ============ shared section furniture ============ */
+section.band{position:relative;padding:110px var(--edge) 110px calc(var(--edge) + 72px)}
+.kicker{display:flex;align-items:center;gap:14px;font-family:"Mono";font-size:11.5px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--mint);margin-bottom:22px}
+.kicker::before{content:"";width:46px;height:1px;background:var(--mint)}
+h2{font-family:"BigS";font-weight:900;text-transform:uppercase;line-height:.9;
+  font-size:clamp(44px,5.6vw,84px);margin-bottom:28px}
+.lede{max-width:560px;font-size:17px;line-height:1.7;color:#c9c4d6}
+.lede strong{color:var(--ink);font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:"Mono";font-weight:700;
+  font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+  border-radius:999px;padding:17px 28px}
+.btn.solid{color:#06050a;background:var(--mint)}
+.btn.ghost{color:var(--ink);border:1.5px solid rgba(243,241,247,.85);background:rgba(243,241,247,.06)}
+
+/* ============ HERO (approved v3, unchanged visually) ============ */
+.hero{position:relative;width:100%;height:100vh;min-height:680px;overflow:hidden;
+  display:grid;grid-template-rows:auto 1fr auto}
+.photo-layer{position:absolute;inset:0;z-index:0}
+.photo{position:absolute;top:-2%;right:-4%;height:110%;
+  filter:grayscale(1) contrast(1.3) brightness(1.42);will-change:transform}
+.tint{position:absolute;inset:0;background:linear-gradient(180deg,#3a1fd6 0%,#1a0b5e 55%,#07040f 100%);
+  mix-blend-mode:color;opacity:.78}
+.shade-l{position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 30%,rgba(6,5,10,.86) 41%,rgba(6,5,10,.25) 56%,rgba(6,5,10,0) 66%)}
+.shade-b{position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 0%,rgba(6,5,10,.75) 14%,rgba(6,5,10,0) 36%),
+  linear-gradient(180deg,rgba(6,5,10,.8) 0%,rgba(6,5,10,0) 16%)}
+.glow{position:absolute;right:16%;top:6%;width:46vw;height:46vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(91,60,255,.35),rgba(91,60,255,0) 62%);mix-blend-mode:screen}
+.grain{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:.16;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.pulse{position:absolute;left:calc(-1 * (var(--edge) + 72px));width:100vw;top:-41px;height:80px;pointer-events:none;opacity:.75}
+
+nav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;
+  padding:28px var(--edge) 0 calc(var(--edge) + 46px)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.mark{width:30px;height:30px;border-radius:50%;border:2px solid var(--mint);position:relative}
+.mark::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--mint)}
+.word{font-family:"BigS";font-weight:800;font-size:26px;letter-spacing:.14em}
+.links{display:flex;gap:40px;list-style:none}
+.links a{font-family:"Mono";font-size:12.5px;letter-spacing:.2em;color:#d6d2e0;text-decoration:none;text-transform:uppercase}
+.links a.on{color:var(--ink)}
+.links a.on::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mint);margin-right:10px;vertical-align:2px}
+.nav-r{display:flex;align-items:center;gap:14px}
+.btn-book{font-family:"Mono";font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:#06050a;background:var(--mint);border:0;border-radius:999px;padding:15px 24px;text-decoration:none}
+.burger{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:rgba(6,5,10,.4);
+  display:none;place-content:center;gap:5px}
+.burger i{display:block;width:18px;height:1.5px;background:var(--ink)}
+
+.rail{position:absolute;z-index:5;top:50%;font-family:"Mono";font-size:11.5px;letter-spacing:.32em;
+  text-transform:uppercase;color:#dcd8e6;white-space:nowrap;display:flex;align-items:center;gap:16px}
+.rail.l{left:calc(var(--edge) + 6px);transform:translate(-50%,-50%) rotate(-90deg);transform-origin:center;margin-left:8px}
+.rail.r{right:calc(var(--edge) + 6px);transform:translate(50%,-50%) rotate(90deg);margin-right:8px}
+.rail b{display:inline-block;width:46px;height:1px;background:var(--mint)}
+
+.hero main{position:relative;z-index:4;padding:0 var(--edge) 0 calc(var(--edge) + 72px);align-self:center;margin-top:-10px}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:"Mono";font-size:12px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--mint);border:1px solid rgba(92,255,198,.35);border-radius:999px;padding:9px 16px 9px 12px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px rgba(92,255,198,.18),0 0 14px var(--mint)}
+h1{font-family:"BigS";font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.005em;
+  font-size:min(8vw,13.2vh);margin:24px 0 24px}
+h1 .l1{display:block;color:var(--ink)}
+h1 .l2{display:block;color:transparent;-webkit-text-stroke:2px var(--mint)}
+h1 .l3{display:block;color:var(--mint)}
+.sub{max-width:440px;font-size:17px;line-height:1.6;color:#c9c4d6}
+.sub strong{color:var(--ink);font-weight:600}
+.ctas{display:flex;align-items:center;gap:30px;margin-top:34px;flex-wrap:wrap}
+.play{display:flex;align-items:center;gap:18px;text-decoration:none;color:var(--ink)}
+.play-btn{width:68px;height:68px;border-radius:50%;background:var(--mint);display:grid;place-items:center;
+  box-shadow:0 0 0 10px rgba(92,255,198,.10),0 0 0 22px rgba(92,255,198,.05),0 10px 40px rgba(92,255,198,.35)}
+.play-btn svg{margin-left:4px}
+.play-t{display:flex;flex-direction:column;gap:5px}
+.play-t span:first-child{font-family:"Arch";font-weight:700;font-size:16px;letter-spacing:.02em}
+.play-t span:last-child{font-family:"Mono";font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+.hero footer{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;
+  margin:0 var(--edge) 0 calc(var(--edge) + 72px);padding:22px 0 28px}
+.tags{display:flex;gap:46px;list-style:none}
+.tags li{display:flex;align-items:baseline;gap:12px}
+.tags small{font-family:"Mono";font-size:11px;color:var(--mint);letter-spacing:.1em}
+.tags span{font-family:"Arch";font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#e4e0ec}
+.foot-r{display:flex;align-items:center;gap:26px}
+.socials{display:flex;gap:10px}
+.socials a{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  font-family:"FAB";font-size:15px;color:var(--ink);text-decoration:none}
+.mini{display:flex;align-items:center;gap:14px;padding:0 26px 0 0;border-right:1px solid var(--line)}
+.mini-btn{width:38px;height:38px;border-radius:50%;background:var(--mint);display:grid;place-items:center}
+.mini-btn svg{margin-left:2px}
+.mini-t{display:flex;flex-direction:column;gap:3px}
+.mini-t b{font-family:"BigS";font-weight:800;font-size:17px;letter-spacing:.06em;text-transform:uppercase}
+.mini-t small{font-family:"Mono";font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.wave{display:flex;gap:2px;align-items:center;height:26px;width:150px}
+.wave i{flex:1;border-radius:2px;background:rgba(243,241,247,.28)}
+.wave i.p{background:var(--mint)}
+.mini-time{font-family:"Mono";font-size:11px;color:#c9c4d6;letter-spacing:.08em}
+
+/* ============ MIXES ============ */
+#mixes .player-slot{max-width:720px;margin-top:40px;border:1px dashed rgba(92,255,198,.4);
+  border-radius:18px;padding:34px 30px;background:rgba(8,6,16,.6)}
+.slot-top{display:flex;justify-content:space-between;align-items:center;font-family:"Mono";
+  font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.slot-top em{font-style:normal;color:var(--mint)}
+.slot-title{font-family:"BigS";font-weight:800;font-size:30px;text-transform:uppercase;margin:14px 0 4px}
+.slot-note{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* ============ ABOUT ============ */
+#about{background:linear-gradient(180deg,var(--bg) 0%,#0a0716 50%,var(--bg) 100%)}
+#about .cols{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;margin-top:10px}
+#about .oneliner{font-family:"BigS";font-weight:800;font-size:clamp(24px,2.6vw,34px);
+  text-transform:uppercase;line-height:1.15;color:var(--ink);margin-bottom:26px}
+#about .oneliner em{font-style:normal;color:var(--mint)}
+#about p{font-size:16px;line-height:1.75;color:#c9c4d6;margin-bottom:18px}
+#about p strong{color:var(--ink);font-weight:600}
+.facts{list-style:none;border-top:1px solid var(--line)}
+.facts li{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.facts small{font-family:"Mono";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mint)}
+.facts span{font-family:"Arch";font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-align:right}
+
+/* ============ DATES ============ */
+#dates .empty{max-width:640px;margin-top:34px;border:1px solid var(--line);border-radius:18px;
+  padding:44px 38px;background:rgba(8,6,16,.6);text-align:left}
+#dates .empty p{font-size:17px;line-height:1.7;color:#c9c4d6;margin-bottom:26px}
+
+/* ============ BOOK ============ */
+#book{background:
+  radial-gradient(60vw 40vw at 80% 0%,rgba(91,60,255,.22),transparent 65%),var(--bg)}
+.pitch{display:flex;flex-wrap:wrap;gap:16px;margin:26px 0 34px;list-style:none}
+.pitch li{font-family:"Mono";font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#dcd8e6;
+  border:1px solid var(--line);border-radius:999px;padding:12px 20px}
+.pitch li b{color:var(--mint);font-weight:400;margin-right:8px}
+#book .mailto{display:block;font-family:"Mono";font-size:13px;letter-spacing:.14em;color:var(--mint);
+  text-decoration:none;margin-top:22px}
+
+/* ============ PRESS ============ */
+#press .lede{margin-bottom:30px}
+.badge{display:inline-block;font-family:"Mono";font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:#ffb35c;border:1px solid rgba(255,179,92,.45);border-radius:999px;padding:7px 14px;margin-bottom:20px}
+
+/* ============ CLOSING CTA + SITE FOOTER ============ */
+#close{text-align:left;padding-bottom:90px}
+#close h2{font-size:clamp(50px,6.4vw,96px)}
+.site-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;
+  margin:0 var(--edge) 0 calc(var(--edge) + 72px);padding:30px 0 40px;border-top:1px solid var(--line)}
+.site-foot small{font-family:"Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.site-foot a{color:var(--mint);text-decoration:none}
+
+/* ============ responsive ============ */
+@media (max-width:980px){
+  .links{display:none}
+  .burger{display:grid}
+  .rail{display:none}
+  section.band{padding:80px var(--edge)}
+  .hero main{padding:0 var(--edge)}
+  .hero footer{margin:0 var(--edge)}
+  .site-foot{margin:0 var(--edge)}
+  #about .cols{grid-template-columns:1fr}
+  .mini{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO (approved v3) ================= -->
+<section class="hero" id="home">
+  <div class="photo-layer" aria-hidden="true">
+    <img class="photo" src="assets/photo.jpg" alt="">
+    <div class="tint"></div>
+    <div class="glow"></div>
+    <div class="shade-l"></div>
+    <div class="shade-b"></div>
+  </div>
+
+  <div class="rail l"><b></b>Minimal house &nbsp;/&nbsp; Hard techno &nbsp;/&nbsp; South Africa</div>
+  <div class="rail r">Scroll for mixes &amp; dates<b></b></div>
+
+  <nav>
+    <a class="logo" href="#home"><span class="mark"></span><span class="word">SUBWIID</span></a>
+    <ul class="links">
+      <li><a class="on" href="#home">Home</a></li>
+      <li><a href="#mixes">Mixes</a></li>
+      <li><a href="#dates">Dates</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#press">Press kit</a></li>
+    </ul>
+    <div class="nav-r">
+      <a class="btn-book" href="#book">Book Subwiid</a>
+      <button class="burger" aria-label="Menu"><i></i><i></i></button>
+    </div>
+  </nav>
+
+  <main>
+    <span class="eyebrow"><span class="dot"></span>Now booking · Clubs · Bars · Festivals</span>
+    <h1><span class="l1">Strip it</span><span class="l2">back.</span><span class="l3">Hit it hard.</span></h1>
+    <p class="sub">Rolling <strong>minimal house</strong> that tightens, bar by bar, into <strong>hard techno</strong> pressure. Built for dark rooms anywhere in South Africa.</p>
+    <div class="ctas">
+      <a class="play" href="#mixes">
+        <span class="play-btn"><svg width="22" height="24" viewBox="0 0 22 24"><path d="M0 0 L22 12 L0 24Z" fill="#06050a"/></svg></span>
+        <span class="play-t"><span>Play the latest mix</span><span>On SoundCloud</span></span>
+      </a>
+      <a class="btn ghost" href="#book">Book a set <span>&rarr;</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <svg class="pulse" viewBox="0 0 1600 80" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="pg" x1="0" x2="1">
+          <stop offset="0" stop-color="#5cffc6" stop-opacity="0"/>
+          <stop offset=".18" stop-color="#5cffc6" stop-opacity=".9"/>
+          <stop offset=".62" stop-color="#5cffc6" stop-opacity="1"/>
+          <stop offset="1" stop-color="#5cffc6" stop-opacity=".15"/>
+        </linearGradient>
+        <filter id="gl"><feGaussianBlur stdDeviation="2.5"/></filter>
+      </defs>
+      <path id="pp" fill="none" stroke="url(#pg)" stroke-width="1.5" d=""/>
+      <use href="#pp" filter="url(#gl)" opacity=".8"/>
+    </svg>
+    <ul class="tags">
+      <li><small>01</small><span>Minimal house</span></li>
+      <li><small>02</small><span>Hard techno</span></li>
+      <li><small>03</small><span>SA-wide bookings</span></li>
+    </ul>
+    <div class="foot-r">
+      <!-- mini player: placeholder until a real SoundCloud mix exists -->
+      <div class="mini">
+        <span class="mini-btn"><svg width="10" height="12" viewBox="0 0 22 24"><path d="M0 0 L22 12 L0 24Z" fill="#06050a"/></svg></span>
+        <span class="mini-t"><b>First mix loading</b><small>SoundCloud &middot; Coming soon</small></span>
+        <span class="wave" id="wave"></span>
+        <span class="mini-time">--:-- / --:--</span>
+      </div>
+      <div class="socials">
+        <a href="https://www.tiktok.com/@subwiid" aria-label="TikTok">&#xe07b;</a>
+        <a href="#" aria-label="Instagram">&#xf16d;</a>
+        <a href="#" aria-label="SoundCloud">&#xf1be;</a>
+      </div>
+    </div>
+  </footer>
+  <div class="grain"></div>
+</section>
+
+<!-- ================= MIXES ================= -->
+<section class="band" id="mixes">
+  <div class="kicker">Mixes</div>
+  <h2>The floor,<br>recorded</h2>
+  <p class="lede">Sets, edits and live sessions on SoundCloud.</p>
+
+  <!-- SoundCloud embed drops in here once the first mix is live -->
+  <div class="player-slot">
+    <div class="slot-top"><em>&#9679; Next upload</em><span>SoundCloud</span></div>
+    <div class="slot-title">First session incoming</div>
+    <p class="slot-note">The first full set lands here. Follow <a href="https://www.tiktok.com/@subwiid" style="color:var(--mint);text-decoration:none">@subwiid on TikTok</a> for the live clips until it drops.</p>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="band" id="about">
+  <div class="kicker">About</div>
+  <h2>Subwiid</h2>
+  <div class="cols">
+    <div>
+      <p class="oneliner">Minimal house that <em>strips down</em>, hard techno that <em>hits back</em>.</p>
+      <p>subwiid is <strong>Jacques Wud</strong>, a South African DJ turning up the pressure from minimal house through to hard techno. His sets strip the floor bare: starting deep and tight, bar by bar, until the room runs on hard techno alone.</p>
+      <p>Every set is mixed live and read off the room, built for dark rooms, never on autopilot. <strong>TikTok (@subwiid)</strong> is the growth engine, with raw clips from the bedroom to the floor captured as it happens. SoundCloud carries the mixes and edits; originals in production.</p>
+      <p>He travels anywhere in South Africa for the right room and fee. <strong>Now taking first bookings.</strong></p>
+    </div>
+    <ul class="facts">
+      <li><small>Sound</small><span>Minimal house &rarr; hard techno</span></li>
+      <li><small>Base</small><span>South Africa · travels SA-wide</span></li>
+      <li><small>Sets</small><span>Mixed live, read off the room</span></li>
+      <li><small>Watch</small><span>TikTok @subwiid</span></li>
+      <li><small>Book</small><span>bookings@subwiid.co.za</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= DATES ================= -->
+<section class="band" id="dates">
+  <div class="kicker">Dates</div>
+  <h2>Dates</h2>
+  <div class="empty">
+    <p>Nothing on the calendar yet. Now taking first bookings — book a room.</p>
+    <a class="btn solid" href="#book">Book a set</a>
+  </div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section class="band" id="book">
+  <div class="kicker">Bookings</div>
+  <h2>Clubs. Bars.<br>Festivals.</h2>
+  <p class="lede">subwiid builds sets from <strong>minimal house</strong> into <strong>hard techno</strong> pressure. Mixed live, read off the room. Plays anywhere in SA for the right room, right fee.</p>
+  <ul class="pitch">
+    <li><b>01</b>Live-mixed, never autopilot</li>
+    <li><b>02</b>Minimal &rarr; hard techno arc</li>
+    <li><b>03</b>SA-wide for the right room</li>
+  </ul>
+  <a class="btn solid" href="mailto:bookings@subwiid.co.za">Book a set</a>
+  <a class="mailto" href="mailto:bookings@subwiid.co.za">bookings@subwiid.co.za</a>
+</section>
+
+<!-- ================= PRESS KIT ================= -->
+<section class="band" id="press">
+  <div class="kicker">Press kit</div>
+  <h2>Press kit</h2>
+  <span class="badge">In production</span>
+  <p class="lede">Artist photos, full bio and live set links, ready to send.</p>
+  <a class="btn ghost" href="mailto:bookings@subwiid.co.za?subject=Press%20kit%20request">Request press kit</a>
+</section>
+
+<!-- ================= CLOSING CTA ================= -->
+<section class="band" id="close">
+  <div class="kicker">Lock it in</div>
+  <h2>Ready to lock<br>in a set?</h2>
+  <a class="btn solid" href="mailto:bookings@subwiid.co.za">Book Subwiid</a>
+</section>
+
+<footer class="site-foot">
+  <small>&copy; 2026 SUBWIID · South Africa</small>
+  <div class="socials">
+    <a href="https://www.tiktok.com/@subwiid" aria-label="TikTok">&#xe07b;</a>
+    <a href="#" aria-label="Instagram">&#xf16d;</a>
+    <a href="#" aria-label="SoundCloud">&#xf1be;</a>
+  </div>
+  <small><a href="mailto:bookings@subwiid.co.za">bookings@subwiid.co.za</a></small>
+</footer>
+
+<script>
+// kick-drum pulse line: flat, then sharp four-on-the-floor spikes growing toward the right
+(function(){
+  let d="M0 60", x=0; const step=8;
+  while(x<1600){
+    x+=step;
+    const beat = x>360 && (x%64)<step;
+    if(beat){
+      const amp = Math.min(48, 10 + (x-360)/22);
+      d+=` L${x-3} 60 L${x} ${60-amp} L${x+3} ${60+amp*.55} L${x+6} 60`;
+      x+=6;
+    } else {
+      const jitter = x>360 ? (Math.sin(x*.7)*2) : 0;
+      d+=` L${x} ${60+jitter}`;
+    }
+  }
+  document.getElementById('pp').setAttribute('d',d);
+
+  // decorative waveform bars in the mini player
+  const w=document.getElementById('wave');
+  for(let i=0;i<36;i++){
+    const h = 18 + Math.abs(Math.sin(i*.55)*60) * (0.45+0.55*Math.abs(Math.cos(i*.21)));
+    const el=document.createElement('i'); el.style.height=Math.min(100,h)+'%';
+    if(i<11) el.className='p'; w.appendChild(el);
+  }
+})();
+</script>
+</body>
+</html>
