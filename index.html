@@ -167,6 +167,16 @@ h1 .l3{display:block;color:var(--mint)}
 .site-foot small{font-family:"Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .site-foot a{color:var(--mint);text-decoration:none}
 
+/* ============ events (dates) ============ */
+.gigs{display:flex;flex-direction:column;gap:20px;margin-top:6px}
+.gig{border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:rgba(8,6,16,.55);display:flex;flex-direction:column;gap:8px}
+.gig-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.gig-dow{font-family:"Mono";font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);font-weight:700}
+.gig-tag{font-family:"Mono";font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.gig-title{font-family:"BigS";font-weight:800;font-size:24px;text-transform:uppercase;letter-spacing:.02em;margin:4px 0 3px}
+.gig-loc{font-size:14px;color:var(--ink);letter-spacing:.02em}
+.gig-time{font-family:"Mono";font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+
 /* ============ responsive ============ */
 @media (max-width:980px){
   .links{display:none}
@@ -296,13 +306,29 @@ h1 .l3{display:block;color:var(--mint)}
   </div>
 </section>
 
-<!-- ================= DATES ================= -->
+<!-- ================= UPCOMING ================= -->
 <section class="band" id="dates">
-  <div class="kicker">Dates</div>
-  <h2>Dates</h2>
-  <div class="empty">
-    <p>Nothing on the calendar yet. Now taking first bookings — book a room.</p>
-    <a class="btn solid" href="#book">Book a set</a>
+  <div class="kicker">Next up</div>
+  <h2>Gigs booked</h2>
+  <div class="gigs">
+    <div class="gig">
+      <div class="gig-head">
+        <span class="gig-dow">FRI · 9 OCT</span>
+        <span class="gig-tag">Pomona, Kempton Park</span>
+      </div>
+      <h3 class="gig-title">GRAADILA CAFE BREDELL</h3>
+      <p class="gig-loc">185 HIGH RD, POMONA, KEMPTON PARK 1619</p>
+      <p class="gig-time">18:00 – 20:00</p>
+    </div>
+    <div class="gig">
+      <div class="gig-head">
+        <span class="gig-dow">SAT · 10 OCT</span>
+        <span class="gig-tag">Morehill, Kempton Park</span>
+      </div>
+      <h3 class="gig-title">FORMULA K RACEWAY</h3>
+      <p class="gig-loc">7 GOLDEN DR, MOREHILL, BENONI</p>
+      <p class="gig-time">16:00 – 18:00</p>
+    </div>
   </div>
 </section>
 
