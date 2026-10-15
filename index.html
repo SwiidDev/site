@@ -38,7 +38,8 @@ h2{font-family:"BigS";font-weight:900;text-transform:uppercase;line-height:.9;
 
 /* ============ HERO (approved v3, unchanged visually) ============ */
 .hero{position:relative;width:100%;height:100vh;min-height:680px;overflow:hidden;
-  display:grid;grid-template-rows:auto 1fr auto}
+  display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto}
+@supports (height:100dvh){.hero{height:100dvh}}
 .photo-layer{position:absolute;inset:0;z-index:0}
 .photo{position:absolute;top:-2%;right:-4%;height:110%;
   filter:grayscale(1) contrast(1.3) brightness(1.42);will-change:transform}
@@ -186,8 +187,47 @@ h1 .l3{display:block;color:var(--mint)}
   .hero main{padding:0 var(--edge)}
   .hero footer{margin:0 var(--edge)}
   .site-foot{margin:0 var(--edge)}
-  #about .cols{grid-template-columns:1fr}
+  #about .cols{grid-template-columns:1fr;gap:40px}
   .mini{display:none}
+  nav{padding:24px var(--edge) 0}
+  /* burger menu panel (nav is already position:relative) */
+  .links.open{display:flex;position:absolute;top:100%;right:var(--edge);z-index:9;
+    flex-direction:column;gap:18px;background:#0b0918;border:1px solid var(--line);
+    border-radius:14px;padding:20px 26px}
+  .links.open a{font-size:13px}
+}
+@media (max-width:640px){
+  nav{padding-top:18px;gap:12px}
+  .word{font-size:19px;letter-spacing:.1em}
+  .mark{width:24px;height:24px}
+  .mark::after{inset:5px}
+  .btn-book{padding:11px 16px;font-size:10.5px;letter-spacing:.12em}
+  .burger{width:42px;height:42px}
+  .nav-r{gap:10px}
+  .hero{height:auto;min-height:100svh}
+  @supports (min-height:100dvh){.hero{min-height:100dvh}}
+  .hero main{padding:34px var(--edge) 36px}
+  .eyebrow{white-space:normal;max-width:100%;font-size:10.5px;letter-spacing:.16em}
+  h1{font-size:clamp(40px,13.5vw,62px);margin:20px 0 18px}
+  .sub{font-size:15.5px}
+  .ctas{gap:20px;margin-top:28px}
+  .play-btn{width:56px;height:56px}
+  .play-btn svg{width:18px;height:20px}
+  .hero footer{flex-wrap:wrap;gap:16px;padding:6px 0 26px}
+  .pulse{display:none}
+  .tags{gap:8px 24px;flex-wrap:wrap}
+  section.band{padding:60px var(--edge)}
+  .kicker{margin-bottom:16px}
+  h2{font-size:clamp(38px,10.5vw,54px);margin-bottom:20px}
+  #close h2{font-size:clamp(40px,11vw,58px)}
+  .lede{font-size:15.5px}
+  .gig{padding:18px 18px}
+  .gig-head{flex-direction:column;align-items:flex-start;gap:6px}
+  .facts li{flex-wrap:wrap;gap:8px}
+  .player-slot{padding:26px 20px;margin-top:30px}
+  .slot-title{font-size:24px}
+  .pitch li{font-size:11px;padding:10px 14px;letter-spacing:.12em}
+  .btn{padding:15px 22px;font-size:11.5px}
 }
 </style>
 </head>
@@ -208,7 +248,7 @@ h1 .l3{display:block;color:var(--mint)}
 
   <nav>
     <a class="logo" href="#home"><span class="mark"></span><span class="word">SUBWIID</span></a>
-    <ul class="links">
+    <ul class="links" id="navlinks">
       <li><a class="on" href="#home">Home</a></li>
       <li><a href="#mixes">Mixes</a></li>
       <li><a href="#dates">Dates</a></li>
@@ -217,7 +257,7 @@ h1 .l3{display:block;color:var(--mint)}
     </ul>
     <div class="nav-r">
       <a class="btn-book" href="#book">Book Subwiid</a>
-      <button class="burger" aria-label="Menu"><i></i><i></i></button>
+      <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="navlinks"><i></i><i></i></button>
     </div>
   </nav>
 
@@ -442,6 +482,24 @@ h1 .l3{display:block;color:var(--mint)}
     const el=document.createElement('i'); el.style.height=Math.min(100,h)+'%';
     if(i<11) el.className='p'; w.appendChild(el);
   }
+})();
+
+// mobile menu: burger toggles the links panel, link click closes it
+(function(){
+  const burger=document.querySelector('.burger'), links=document.getElementById('navlinks');
+  if(!burger||!links) return;
+  burger.addEventListener('click',()=>{
+    const open=links.classList.toggle('open');
+    burger.setAttribute('aria-expanded',String(open));
+    burger.setAttribute('aria-label',open?'Close menu':'Menu');
+  });
+  links.addEventListener('click',e=>{
+    if(e.target.closest('a')){
+      links.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      burger.setAttribute('aria-label','Menu');
+    }
+  });
 })();
 </script>
 </body>
